@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dương Thị Hải Chiều - Digital Portfolio</title>
+  <title>Dương Thị Hải Chiều | Digital Hub</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -21,27 +21,26 @@
     }
 
     :root {
-      --font-title: 'Quicksand', sans-serif;
+      --font-title: 'Playfair Display', serif;
+      --font-sub: 'Quicksand', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       
-      /* Starry sky and orange firefly colors */
-      --color-dark-bg: rgba(5, 10, 24, 0.4);
       --color-accent-orange: #ff9f1c;
       --color-accent-orange-glow: rgba(255, 159, 28, 0.4);
       --color-accent-cyan: #2ec4b6;
       --color-accent-cyan-glow: rgba(46, 196, 182, 0.3);
       --color-text-main: #f0f2f5;
-      --color-text-sub: #b0b9c6;
+      --color-text-sub: #cbd5e1;
       
-      --glass-bg: rgba(10, 20, 38, 0.5);
+      --glass-bg: rgba(8, 14, 32, 0.6);
       --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-shadow: rgba(0, 0, 0, 0.3);
+      --glass-shadow: rgba(0, 0, 0, 0.4);
     }
 
     body {
       font-family: var(--font-body);
       color: var(--color-text-main);
-      background-color: #040814;
+      background-color: #030712;
       overflow-x: hidden;
       line-height: 1.6;
     }
@@ -58,19 +57,19 @@
       pointer-events: none;
     }
 
-    /* Subtle overlay to ensure text readability without modifying the video style */
+    /* Subtle backdrop overlay for text contrast (No filter on video) */
     .bg-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: linear-gradient(135deg, rgba(4, 8, 20, 0.5) 0%, rgba(10, 15, 35, 0.3) 100%);
+      background: radial-gradient(circle at 30% 30%, rgba(5, 10, 25, 0.2) 0%, rgba(3, 7, 18, 0.5) 100%);
       z-index: -2;
       pointer-events: none;
     }
 
-    /* Interactive Canvas for Dreamy Dust particles */
+    /* Interactive Canvas for Dreamy Glow particles */
     #glow-canvas {
       position: fixed;
       top: 0;
@@ -83,8 +82,8 @@
 
     /* --- Custom Cursor --- */
     .custom-cursor {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       border: 2px solid var(--color-accent-orange);
       border-radius: 50%;
       position: fixed;
@@ -112,42 +111,47 @@
       top: 0;
       left: 0;
       width: 100%;
-      padding: 1.5rem 8%;
+      padding: 1.2rem 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
-      transition: background 0.3s, padding 0.3s;
-      backdrop-filter: blur(10px);
+      z-index: 1000;
+      background: rgba(4, 8, 20, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
     }
 
     header.scrolled {
-      background: rgba(5, 10, 25, 0.85);
-      padding: 1rem 8%;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      background: rgba(3, 7, 18, 0.85);
+      padding: 0.9rem 8%;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     }
 
     .logo {
-      font-family: var(--font-title);
+      font-family: var(--font-sub);
       font-weight: 700;
-      font-size: 1.5rem;
-      background: linear-gradient(45deg, var(--color-accent-orange), var(--color-accent-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 1px;
+      font-size: 1.25rem;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+    
+    .logo span {
+      font-weight: 300;
+      color: var(--color-text-sub);
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 2.2rem;
     }
 
     nav a {
       text-decoration: none;
       color: var(--color-text-main);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 500;
       transition: color 0.3s;
       position: relative;
@@ -174,258 +178,243 @@
 
     .btn-drive {
       padding: 0.6rem 1.2rem;
-      background: linear-gradient(135deg, rgba(255, 159, 28, 0.2), rgba(46, 196, 182, 0.2));
+      background: linear-gradient(135deg, rgba(255, 159, 28, 0.25), rgba(46, 196, 182, 0.25));
       border: 1px solid var(--color-accent-orange);
       border-radius: 30px;
       color: var(--color-text-main);
-      font-weight: 600;
-      font-size: 0.85rem;
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 0.8rem;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(255, 159, 28, 0.1);
+      box-shadow: 0 0 10px rgba(255, 159, 28, 0.15);
     }
 
     .btn-drive:hover {
       background: linear-gradient(135deg, var(--color-accent-orange), var(--color-accent-cyan));
       border-color: transparent;
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 159, 28, 0.3);
-      color: #050a18;
+      box-shadow: 0 5px 15px rgba(255, 159, 28, 0.35);
+      color: #030712;
     }
 
-    /* Mobile Menu Toggle */
     .menu-toggle {
       display: none;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: var(--color-text-main);
       cursor: pointer;
     }
 
-    /* --- Container & Layout --- */
-    .section {
+    /* --- Hero Section Layout (Matched to Screenshot) --- */
+    .hero-section {
       min-height: 100vh;
-      padding: 8rem 8% 4rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 7rem 8% 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    /* --- Hero & Intro Section --- */
-    #intro {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 4rem;
+    .portfolio-tag {
+      font-family: var(--font-sub);
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--color-accent-orange);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #ff9f1c 0%, #ffbf69 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-family: var(--font-sub);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      display: flex;
       align-items: center;
+      gap: 0.5rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     }
 
-    .profile-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      padding: 2.5rem;
-      text-align: center;
-      box-shadow: 0 8px 32px var(--glass-shadow);
-      backdrop-filter: blur(16px);
-      transform: translateY(30px);
-      opacity: 0;
-      animation: fadeInUp 0.8s forwards;
+    .hero-sub i {
+      color: var(--color-accent-orange);
     }
 
-    .avatar-wrapper {
+    .hero-desc {
+      font-size: 1.02rem;
+      color: var(--color-text-sub);
+      line-height: 1.75;
+      max-width: 580px;
+      text-align: justify;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Floating Avatar Layout (Matched to Screenshot) */
+    .hero-media {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 1.5rem;
     }
 
-    .avatar-glow {
+    .avatar-frame {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      animation: gentleFloat 6s ease-in-out infinite;
+    }
+
+    .avatar-frame::before {
+      content: '';
       position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      background: linear-gradient(45deg, var(--color-accent-orange), var(--color-accent-cyan));
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, var(--color-accent-orange-glow), var(--color-accent-cyan-glow));
       border-radius: 50%;
       z-index: -1;
-      filter: blur(12px);
-      opacity: 0.7;
-      animation: rotateGlow 6s linear infinite;
+      filter: blur(15px);
+      opacity: 0.8;
     }
 
-    .avatar {
+    .avatar-img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.2);
+      border: 4px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
     }
 
-    .profile-card h1 {
-      font-family: var(--font-title);
-      font-weight: 700;
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
-
-    .student-id {
-      display: inline-block;
-      font-size: 0.85rem;
-      padding: 0.2rem 0.8rem;
-      background: rgba(46, 196, 182, 0.15);
-      border: 1px solid var(--color-accent-cyan);
+    /* Floating Badge: Location */
+    .badge-location {
+      position: absolute;
+      top: 15%;
+      right: -12%;
+      background: rgba(10, 20, 38, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0.45rem 1rem;
       border-radius: 20px;
-      color: var(--color-accent-cyan);
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-    }
-
-    .info-list {
-      text-align: left;
-      margin-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 1.5rem;
-    }
-
-    .info-item {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
+      gap: 0.4rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
-    .info-item i {
-      color: var(--color-accent-orange);
-      font-size: 1.1rem;
-      width: 20px;
-      text-align: center;
-    }
-
-    .bio-wrapper {
-      transform: translateY(30px);
-      opacity: 0;
-      animation: fadeInUp 0.8s 0.2s forwards;
-    }
-
-    .greeting {
-      font-family: var(--font-title);
-      font-size: 1.3rem;
-      color: var(--color-accent-orange);
-      margin-bottom: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .bio-wrapper h2 {
-      font-family: var(--font-title);
-      font-size: 3rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      color: #fff;
-    }
-
-    .bio-text {
-      font-size: 1.05rem;
-      color: var(--color-text-sub);
-      margin-bottom: 2rem;
-    }
-
-    .bio-text p {
-      margin-bottom: 1rem;
-    }
-
-    .philosophy-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .philosophy-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 1.5rem;
-      transition: all 0.3s;
-    }
-
-    .philosophy-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: var(--color-accent-cyan-glow);
-      transform: translateY(-3px);
-    }
-
-    .philosophy-card i {
-      font-size: 1.5rem;
+    .badge-location i {
       color: var(--color-accent-cyan);
-      margin-bottom: 0.8rem;
     }
 
-    .philosophy-card h4 {
-      font-family: var(--font-title);
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: #fff;
+    /* Floating Badge: Student ID */
+    .badge-mssv {
+      position: absolute;
+      bottom: 12%;
+      left: -12%;
+      background: rgba(10, 20, 38, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 159, 28, 0.2);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-accent-orange);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
-    .philosophy-card p {
-      font-size: 0.85rem;
-      color: var(--color-text-sub);
-    }
-
-    /* --- Project Section --- */
-    #projects {
+    /* --- Common Section Styling --- */
+    .section {
+      min-height: 100vh;
+      padding: 7rem 8% 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       position: relative;
+      z-index: 10;
     }
 
     .section-header {
       text-align: center;
       margin-bottom: 3.5rem;
-      max-width: 600px;
+      max-width: 650px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .section-header h2 {
       font-family: var(--font-title);
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 700;
-      color: #fff;
+      color: #ffffff;
       margin-bottom: 1rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
 
     .section-header p {
       color: var(--color-text-sub);
-      font-size: 0.95rem;
+      font-size: 0.98rem;
     }
 
     .drive-section-btn {
       display: flex;
       justify-content: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
+    /* --- Project Tab Showcase (Frosted Glass) --- */
     .project-container {
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 310px 1fr;
       gap: 3rem;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 24px;
       padding: 2.5rem;
-      box-shadow: 0 8px 32px var(--glass-shadow);
-      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 40px var(--glass-shadow);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .project-tabs {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.9rem;
       border-right: 1px solid rgba(255, 255, 255, 0.08);
       padding-right: 1.5rem;
     }
@@ -433,13 +422,13 @@
     .tab-btn {
       background: none;
       border: 1px solid transparent;
-      padding: 1rem 1.2rem;
+      padding: 1.1rem 1.3rem;
       border-radius: 12px;
       color: var(--color-text-sub);
       font-family: var(--font-body);
       font-weight: 500;
       text-align: left;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
@@ -449,20 +438,20 @@
 
     .tab-btn:hover {
       background: rgba(255, 255, 255, 0.03);
-      color: var(--color-text-main);
+      color: #ffffff;
     }
 
     .tab-btn.active {
-      background: linear-gradient(135deg, rgba(255, 159, 28, 0.15), rgba(46, 196, 182, 0.05));
+      background: linear-gradient(135deg, rgba(255, 159, 28, 0.18), rgba(46, 196, 182, 0.05));
       border: 1px solid var(--color-accent-orange);
       color: var(--color-accent-orange);
       font-weight: 600;
-      box-shadow: 0 4px 15px rgba(255, 159, 28, 0.05);
+      box-shadow: 0 4px 15px rgba(255, 159, 28, 0.08);
     }
 
     .tab-btn i {
-      font-size: 1rem;
-      opacity: 0.7;
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
 
     .project-content-wrapper {
@@ -471,7 +460,7 @@
 
     .project-pane {
       display: none;
-      animation: fadeIn 0.5s forwards;
+      animation: fadeInPane 0.6s forwards;
     }
 
     .project-pane.active {
@@ -489,14 +478,14 @@
 
     .pane-header h3 {
       font-family: var(--font-title);
-      font-size: 1.6rem;
+      font-size: 1.65rem;
       font-weight: 700;
-      color: #fff;
+      color: #ffffff;
     }
 
     .project-tag {
-      font-size: 0.8rem;
-      padding: 0.25rem 0.8rem;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.8rem;
       border-radius: 20px;
       font-weight: 600;
       background: rgba(255, 159, 28, 0.15);
@@ -507,13 +496,13 @@
     .project-info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 2.2rem;
       margin-bottom: 2rem;
     }
 
     .info-block h5 {
-      font-family: var(--font-title);
-      font-size: 1rem;
+      font-family: var(--font-sub);
+      font-size: 0.9rem;
       color: var(--color-accent-cyan);
       margin-bottom: 0.6rem;
       text-transform: uppercase;
@@ -521,7 +510,7 @@
     }
 
     .info-block p {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--color-text-sub);
       text-align: justify;
     }
@@ -535,9 +524,9 @@
     }
 
     .process-section h4 {
-      font-family: var(--font-title);
-      font-size: 1.1rem;
-      color: #fff;
+      font-family: var(--font-sub);
+      font-size: 1rem;
+      color: #ffffff;
       margin-bottom: 1rem;
       display: flex;
       align-items: center;
@@ -556,7 +545,7 @@
       position: relative;
       padding-left: 1.5rem;
       margin-bottom: 0.8rem;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--color-text-sub);
     }
 
@@ -567,7 +556,6 @@
       color: var(--color-accent-cyan);
     }
 
-    /* Dynamic Artifact Card */
     .artifact-card {
       background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
       border: 1px solid rgba(255,255,255,0.06);
@@ -600,13 +588,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
 
     .artifact-text h6 {
-      font-family: var(--font-title);
-      font-size: 1rem;
-      color: #fff;
+      font-family: var(--font-sub);
+      font-size: 0.95rem;
+      color: #ffffff;
       margin-bottom: 0.2rem;
     }
 
@@ -616,7 +604,7 @@
     }
 
     .btn-view-artifact {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1.1rem;
       background: none;
       border: 1px solid var(--color-accent-cyan);
       border-radius: 20px;
@@ -629,49 +617,46 @@
 
     .btn-view-artifact:hover {
       background: var(--color-accent-cyan);
-      color: #050a18;
+      color: #030712;
       box-shadow: 0 0 10px var(--color-accent-cyan-glow);
     }
 
-    /* Specific Styling for mobile assignment fallback note */
     .mobile-fallback-note {
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       font-style: italic;
       color: var(--color-accent-orange);
       background: rgba(255, 159, 28, 0.08);
       border-left: 3px solid var(--color-accent-orange);
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 0 8px 8px 0;
       margin-bottom: 1.5rem;
     }
 
-    /* --- Reflection Section --- */
-    #reflection h3 {
-      font-family: var(--font-title);
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 1.5rem;
-    }
-
+    /* --- Reflection Grid --- */
     .reflection-grid {
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 3rem;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 3.5rem;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 24px;
       padding: 3rem;
-      box-shadow: 0 8px 32px var(--glass-shadow);
-      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 40px var(--glass-shadow);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
-    .reflection-content {
-      color: var(--color-text-sub);
-      font-size: 1rem;
+    .reflection-content h3 {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
     }
 
     .reflection-content p {
+      color: var(--color-text-sub);
+      font-size: 0.98rem;
       margin-bottom: 1.5rem;
       text-align: justify;
     }
@@ -685,18 +670,20 @@
     }
 
     .insight-card h4 {
-      font-family: var(--font-title);
-      font-size: 1.1rem;
+      font-family: var(--font-sub);
+      font-size: 1rem;
       color: var(--color-accent-orange);
       margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    /* Interactive Stats / Skills */
-    .stats-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      justify-content: center;
+    .stats-panel h3 {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
     }
 
     .skill-stat {
@@ -704,6 +691,7 @@
       border: 1px solid rgba(255, 255, 255, 0.04);
       padding: 1.2rem;
       border-radius: 16px;
+      margin-bottom: 1.4rem;
       transition: border-color 0.3s;
     }
 
@@ -718,10 +706,10 @@
     }
 
     .skill-name {
-      font-family: var(--font-title);
+      font-family: var(--font-sub);
       font-weight: 600;
-      color: #fff;
-      font-size: 0.95rem;
+      color: #ffffff;
+      font-size: 0.92rem;
     }
 
     .skill-val {
@@ -748,7 +736,7 @@
     /* --- Footer --- */
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.05);
-      background: rgba(4, 8, 20, 0.9);
+      background: rgba(3, 7, 18, 0.9);
       padding: 2rem 8%;
       display: flex;
       justify-content: space-between;
@@ -778,28 +766,33 @@
     }
 
     /* --- Keyframe Animations --- */
-    @keyframes fadeInUp {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    @keyframes gentleFloat {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
     }
 
-    @keyframes rotateGlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes fadeInPane {
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- Responsive Queries --- */
-    @media (max-width: 1024px) {
-      #intro {
+    /* --- Responsive Styling --- */
+    @media (max-width: 1100px) {
+      .hero-section {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        text-align: center;
+        padding-top: 8rem;
+        gap: 4rem;
+      }
+      .hero-desc {
+        margin: 0 auto;
+      }
+      .hero-sub {
+        justify-content: center;
+      }
+      .hero-media {
+        order: -1;
       }
       .project-container {
         grid-template-columns: 1fr;
@@ -822,7 +815,7 @@
 
     @media (max-width: 768px) {
       header {
-        padding: 1.5rem 5%;
+        padding: 1.2rem 5%;
       }
       nav {
         display: none;
@@ -831,7 +824,7 @@
         left: 0;
         width: 100%;
         flex-direction: column;
-        background: rgba(5, 10, 25, 0.95);
+        background: rgba(3, 7, 18, 0.96);
         padding: 2rem;
         gap: 1.5rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -845,18 +838,23 @@
       .section {
         padding: 6rem 5% 3rem;
       }
-      .bio-wrapper h2 {
-        font-size: 2.2rem;
-      }
-      .philosophy-grid {
-        grid-template-columns: 1fr;
+      .hero-title {
+        font-size: 2.8rem;
       }
       .project-info-grid {
         grid-template-columns: 1fr;
       }
+      .badge-location {
+        right: -5%;
+        top: 10%;
+      }
+      .badge-mssv {
+        left: -5%;
+        bottom: 8%;
+      }
       footer {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.2rem;
         text-align: center;
       }
     }
@@ -878,14 +876,14 @@
 
   <!-- Navigation Bar -->
   <header id="navbar">
-    <div class="logo">PORTFOLIO.</div>
+    <div class="logo">Hải Chiều <span>| Digital Hub</span></div>
     <div class="menu-toggle"><i class="fa-solid fa-bars"></i></div>
     <nav>
       <a href="#intro" class="nav-link active">Giới thiệu</a>
-      <a href="#projects" class="nav-link">Sản phẩm</a>
+      <a href="#projects" class="nav-link">Hành trình số (Bài tập)</a>
       <a href="#reflection" class="nav-link">Tổng kết</a>
       <a href="https://drive.google.com/drive/folders/1z3PscRxzMgq5G90SRg_Xb0nxxFi29ix7?usp=drive_link" target="_blank" class="btn-drive">
-        <i class="fa-brands fa-google-drive"></i> Xem bài tập trên GG Drive
+        <i class="fa-brands fa-google-drive"></i> Xem bài tập trên GG drive
       </a>
     </nav>
   </header>
@@ -893,52 +891,36 @@
   <!-- Main Content Sections -->
   <main>
     
-    <!-- Section 1: Intro / Bio -->
-    <section id="intro" class="section">
-      <!-- Profile Metadata Block -->
-      <div class="profile-card">
-        <div class="avatar-wrapper">
-          <div class="avatar-glow"></div>
-          <img src="Hình 1.jpg" alt="Dương Thị Hải Chiều" class="avatar">
+    <!-- Section 1: Intro / Hero (Redesigned to Match Screenshot) -->
+    <section id="intro" class="hero-section">
+      <div class="hero-content">
+        <span class="portfolio-tag">DIGITAL PORTFOLIO</span>
+        <h1 class="hero-title">
+          Nơi Ngôn Ngữ<br>
+          Khúc Xạ qua<br>
+          <span>Lăng Kính Số</span>
+        </h1>
+        <div class="hero-sub">
+          <i class="fa-solid fa-globe"></i> Kỷ nguyên của những kết nối
         </div>
-        <h1>Dương Thị Hải Chiều</h1>
-        <span class="student-id">MSSV: 25042722</span>
-        
-        <div class="info-list">
-          <div class="info-item">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <div>Ngôn ngữ và Văn hoá Anh</div>
-          </div>
-          <div class="info-item">
-            <i class="fa-solid fa-school"></i>
-            <div>Trường Đại học Ngoại ngữ - ĐHQGHN</div>
-          </div>
-          <div class="info-item">
-            <i class="fa-solid fa-book"></i>
-            <div>Nhập môn công nghệ số & Trí tuệ nhân tạo</div>
-          </div>
-        </div>
+        <p class="hero-desc">
+          Chào mừng bạn đến với không gian lưu trữ học thuật cá nhân. Đây không chỉ là nơi tổng hợp các bài tập thuộc học phần <strong>Nhập môn công nghệ số và ứng dụng AI</strong>, mà còn là nhật kỳ chuyển mình đầy cảm hứng của một sinh viên ULIS trên con đường chinh phục tư duy số.
+        </p>
       </div>
 
-      <!-- Narrative Introduction / Goals -->
-      <div class="bio-wrapper">
-        <div class="greeting">XIN CHÀO! MÌNH LÀ HẢI CHIỀU</div>
-        <h2>Khám phá công nghệ qua lăng kính Ngôn ngữ học</h2>
-        <div class="bio-text">
-          <p>Từng nghĩ rằng công nghệ thông tin là một chân trời xa lạ chứa đầy những dòng lệnh phức tạp, nhưng hành trình đồng hành cùng học phần "Nhập môn Công nghệ số và Ứng dụng Trí tuệ Nhân tạo" đã mở ra trong mình một nhận thức hoàn toàn mới mẻ.</p>
-          <p>Đối với một sinh viên Ngôn ngữ Anh, tư duy logic của công nghệ và sự nhạy cảm ngữ cảnh của ngôn ngữ hóa ra lại là một sự giao thoa vô cùng kỳ diệu. Portfolio này là cuốn nhật ký số ghi lại từng bước tự mày mò, vượt qua những rào cản thiết bị để tích lũy các kỹ năng số thiết thực nhất.</p>
-        </div>
-
-        <div class="philosophy-grid">
-          <div class="philosophy-card">
-            <i class="fa-solid fa-seedling"></i>
-            <h4>Mục tiêu học tập</h4>
-            <p>Xây dựng nền tảng tư duy số vững chắc, biết cách làm chủ các công cụ hỗ trợ thông minh để nâng cao chất lượng tự nghiên cứu.</p>
+      <!-- Hero Media Container (Floating Circle & Badges) -->
+      <div class="hero-media">
+        <div class="avatar-frame">
+          <img src="Hình 1.jpg" alt="Dương Thị Hải Chiều" class="avatar-img">
+          
+          <!-- Floating Badge Top Right -->
+          <div class="badge-location">
+            <i class="fa-solid fa-location-dot"></i> Hải Chiều
           </div>
-          <div class="philosophy-card">
-            <i class="fa-solid fa-arrows-spin"></i>
-            <h4>Định hướng tương lai</h4>
-            <p>Khai thác tối đa sức mạnh của AI trong dịch thuật, phân tích dữ liệu văn bản để kiến tạo phương pháp học ngôn ngữ hiện đại, chủ động.</p>
+          
+          <!-- Floating Badge Bottom Left -->
+          <div class="badge-mssv">
+            # MSSV: 25042722
           </div>
         </div>
       </div>
@@ -947,14 +929,14 @@
     <!-- Section 2: Projects Showcase -->
     <section id="projects" class="section">
       <div class="section-header">
-        <h2>Bài Tập Dự Án Cá Nhân</h2>
-        <p>Tập hợp và hệ thống lại quá trình thực hành cùng những sản phẩm học tập xuyên suốt học kỳ vừa qua.</p>
+        <h2>Hành Trình Số (Bài tập)</h2>
+        <p>Hệ thống hoá toàn bộ sản phẩm thực hành số, phân tích dữ liệu và các ranh giới đạo đức học thuật tích lũy trong kỳ.</p>
       </div>
 
       <!-- Required button before the assignment section -->
       <div class="drive-section-btn">
         <a href="https://drive.google.com/drive/folders/1z3PscRxzMgq5G90SRg_Xb0nxxFi29ix7?usp=drive_link" target="_blank" class="btn-drive">
-          <i class="fa-brands fa-google-drive"></i> Xem bài tập trên GG Drive
+          <i class="fa-brands fa-google-drive"></i> Xem bài tập trên GG drive
         </a>
       </div>
 
@@ -1309,13 +1291,13 @@
     const hoverables = document.querySelectorAll('a, button, .tab-btn, .artifact-card');
     hoverables.forEach(item => {
       item.addEventListener('mouseenter', () => {
-        cursor.style.width = '40px';
-        cursor.style.height = '40px';
+        cursor.style.width = '44px';
+        cursor.style.height = '44px';
         cursor.style.backgroundColor = 'rgba(255, 159, 28, 0.1)';
       });
       item.addEventListener('mouseleave', () => {
-        cursor.style.width = '20px';
-        cursor.style.height = '20px';
+        cursor.style.width = '24px';
+        cursor.style.height = '24px';
         cursor.style.backgroundColor = 'transparent';
       });
     });
@@ -1350,17 +1332,14 @@
 
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        // Remove active class from all buttons and panes
         tabBtns.forEach(b => b.classList.remove('active'));
         panes.forEach(p => p.classList.remove('active'));
 
-        // Add active class to clicked tab and corresponding pane
         btn.classList.add('active');
         const targetId = btn.getAttribute('data-target');
         document.getElementById(targetId).classList.add('active');
         
-        // Scroll slightly if on mobile to show pane content
-        if (window.innerWidth <= 1024) {
+        if (window.innerWidth <= 1100) {
           const wrapper = document.querySelector('.project-content-wrapper');
           wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -1368,7 +1347,7 @@
     });
 
     // --- Active Link Highlighting on Scroll ---
-    const sections = document.querySelectorAll('.section');
+    const sections = document.querySelectorAll('.section, .hero-section');
     const navLinks = document.querySelectorAll('.nav-link');
 
     window.addEventListener('scroll', () => {
@@ -1417,7 +1396,7 @@
     const ctx = canvas.getContext('2d');
 
     let particles = [];
-    const particleCount = 40;
+    const particleCount = 45;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -1432,29 +1411,26 @@
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.radius = Math.random() * 2 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.4;
-        this.speedY = (Math.random() - 0.5) * 0.3 - 0.1; // Gentle upwards bias
+        this.speedX = (Math.random() - 0.5) * 0.45;
+        this.speedY = (Math.random() - 0.5) * 0.35 - 0.08;
         this.alpha = Math.random() * 0.5 + 0.1;
         this.decay = Math.random() * 0.005 + 0.002;
         this.growing = Math.random() > 0.5;
-        // Glow hues inspired by the background: warm amber (orange) and soft cyan
-        this.color = Math.random() > 0.5 ? '255, 159, 28' : '46, 196, 182';
+        this.color = Math.random() > 0.55 ? '255, 159, 28' : '46, 196, 182';
       }
 
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Wrap around screen boundaries
         if (this.x < 0) this.x = canvas.width;
         if (this.x > canvas.width) this.x = 0;
         if (this.y < 0) this.y = canvas.height;
         if (this.y > canvas.height) this.y = 0;
 
-        // Breathing/twinkling effect
         if (this.growing) {
           this.alpha += this.decay;
-          if (this.alpha >= 0.7) this.growing = false;
+          if (this.alpha >= 0.75) this.growing = false;
         } else {
           this.alpha -= this.decay;
           if (this.alpha <= 0.1) this.growing = true;
@@ -1465,7 +1441,7 @@
         ctx.beginPath();
         let gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * 6);
         gradient.addColorStop(0, `rgba(${this.color}, ${this.alpha})`);
-        gradient.addColorStop(0.4, `rgba(${this.color}, ${this.alpha * 0.3})`);
+        gradient.addColorStop(0.4, `rgba(${this.color}, ${this.alpha * 0.35})`);
         gradient.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = gradient;
         ctx.arc(this.x, this.y, this.radius * 6, 0, Math.PI * 2);
@@ -1484,12 +1460,11 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
         this.mouseDist = Math.hypot(p.x - lastMousePos.x, p.y - lastMousePos.y);
-        // Slight interaction with mouse movement (gentle repulsion)
         if (this.mouseDist < 120) {
           const forceX = (p.x - lastMousePos.x) / this.mouseDist;
           const forceY = (p.y - lastMousePos.y) / this.mouseDist;
-          p.x += forceX * 1.5;
-          p.y += forceY * 1.5;
+          p.x += forceX * 1.6;
+          p.y += forceY * 1.6;
         }
         p.update();
         p.draw();
