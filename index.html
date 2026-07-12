@@ -82,25 +82,25 @@
 
     /* --- Custom Scrollbars for scrollable elements (Xịn xò) --- */
     .stepper-header::-webkit-scrollbar,
-    .kanban-flow::-webkit-scrollbar,
+    .trello-cards-list::-webkit-scrollbar,
     .prompt-text::-webkit-scrollbar {
       height: 6px;
       width: 4px;
     }
     .stepper-header::-webkit-scrollbar-track,
-    .kanban-flow::-webkit-scrollbar-track,
+    .trello-cards-list::-webkit-scrollbar-track,
     .prompt-text::-webkit-scrollbar-track {
       background: rgba(255, 255, 255, 0.02);
       border-radius: 3px;
     }
     .stepper-header::-webkit-scrollbar-thumb,
-    .kanban-flow::-webkit-scrollbar-thumb,
+    .trello-cards-list::-webkit-scrollbar-thumb,
     .prompt-text::-webkit-scrollbar-thumb {
       background: rgba(255, 159, 28, 0.35);
       border-radius: 3px;
     }
     .stepper-header::-webkit-scrollbar-thumb:hover,
-    .kanban-flow::-webkit-scrollbar-thumb:hover,
+    .trello-cards-list::-webkit-scrollbar-thumb:hover,
     .prompt-text::-webkit-scrollbar-thumb:hover {
       background: rgba(255, 159, 28, 0.65);
     }
@@ -719,7 +719,7 @@
 
     /* --- Interactive Features (Sửa lỗi hiển thị & Nâng cao) --- */
 
-    /* Bài 1: Stepper (Sửa lỗi lướt ngang và scrollbar) */
+    /* Bài 1: Stepper */
     .stepper-container {
       display: flex;
       flex-direction: column;
@@ -806,7 +806,7 @@
       border-radius: 20px;
       font-size: 0.85rem;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.3;
     }
 
     .filter-btn.active {
@@ -948,53 +948,148 @@
       color: #ffffff;
     }
 
-    /* Bài 4: Kanban Progress Timeline (SỬA LỖI SQUISH & TRÀN VIỀN BẰNG NGANG CUỘN) */
-    .kanban-flow {
-      display: flex;
+    /* --- BÀI 4: INTERACTIVE TRELLO KANBAN BOARD SIMULATOR (XỊN XÒ) --- */
+    .trello-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.2rem;
-      overflow-x: auto;
-      padding: 0.5rem 0.5rem 1.5rem;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+      margin-bottom: 1.5rem;
       width: 100%;
     }
 
-    .kanban-card {
-      flex: 0 0 280px; /* Fixed width prevents blowout and lets items scroll beautifully */
-      background: rgba(255, 255, 255, 0.02);
+    .trello-column {
+      background: rgba(0, 0, 0, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 1.2rem;
-      position: relative;
-      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
     }
 
-    .kanban-card h6 {
+    .trello-column h5 {
       font-family: var(--font-sub);
       font-size: 0.88rem;
-      color: var(--color-accent-orange);
-      margin-bottom: 0.5rem;
+      color: var(--color-accent-cyan);
+      border-bottom: 2px solid rgba(46, 196, 182, 0.15);
+      padding-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
     }
 
-    .kanban-card p {
-      font-size: 0.82rem;
+    .trello-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 0.3rem;
+    }
+
+    .trello-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .trello-card:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--color-accent-orange);
+      transform: translateY(-2px);
+    }
+
+    .trello-card.active {
+      border-color: var(--color-accent-orange);
+      background: rgba(255, 159, 28, 0.06);
+      box-shadow: 0 4px 15px rgba(255, 159, 28, 0.08);
+    }
+
+    .trello-card h6 {
+      font-family: var(--font-sub);
+      font-size: 0.88rem;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+
+    .trello-card p {
+      font-size: 0.78rem;
+      color: var(--color-text-sub);
+      line-height: 1.4;
+      text-align: justify;
+    }
+
+    .trello-card .card-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+      background: rgba(46, 196, 182, 0.15);
+      color: var(--color-accent-cyan);
+      margin-top: 0.6rem;
+      font-weight: bold;
+    }
+
+    /* Detailed Task Viewer Block */
+    .task-viewer {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 16px;
+      padding: 1.8rem;
+      margin-top: 1.2rem;
+      animation: fadeInPane 0.4s forwards;
+      width: 100%;
+    }
+
+    .task-viewer h4 {
+      font-family: var(--font-sub);
+      font-size: 1.15rem;
+      color: var(--color-accent-orange);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .task-viewer h4 i {
+      font-size: 1.2rem;
+    }
+
+    .task-viewer .viewer-body {
+      font-size: 0.94rem;
       color: var(--color-text-sub);
       text-align: justify;
     }
 
-    .kanban-card .day-badge {
-      position: absolute;
-      top: -10px;
-      right: 10px;
-      background: var(--color-accent-cyan);
-      color: #030712;
-      font-size: 0.7rem;
-      font-weight: bold;
-      padding: 0.1rem 0.5rem;
-      border-radius: 10px;
+    .task-viewer .viewer-body p {
+      margin-bottom: 1rem;
     }
 
-    /* Bài 5: GenAI visual pipeline */
+    .task-viewer .viewer-body strong {
+      color: #ffffff;
+    }
+
+    .task-viewer .viewer-meta {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.82rem;
+      color: var(--color-accent-cyan);
+      font-weight: bold;
+      margin-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1rem;
+    }
+
+    .task-viewer .viewer-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* --- BÀI 5: GenAI visual pipeline --- */
     .ai-pipeline {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1030,7 +1125,7 @@
       text-align: justify;
     }
 
-    /* Bài 6: RMIT vs VinUni Compare & Golden Rules Flip cards */
+    /* --- BÀI 6: RMIT vs VinUni Compare & Golden Rules Flip cards --- */
     .policy-compare {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1308,6 +1403,12 @@
       }
     }
 
+    @media (max-width: 800px) {
+      .trello-board {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
       header {
         padding: 1.2rem 5%;
@@ -1518,7 +1619,7 @@
             <div class="project-info-grid">
               <div class="info-block">
                 <h5>Mục tiêu học tập</h5>
-                <p>Nghiên cứu sâu về chủ đề: "Động lực học tập của sinh viên trong giáo dục về biến đổi khí hậu". Rèn luyện kỹ năng sàng lọc, tra cứu tài liệu chất lượng cao từ các cơ sở dữ liệu quốc tế lớn và thiết lập bộ lọc đánh giá độ tin cậy nghiêm ngặt.</p>
+                <p>Nghiên cứu sâu về chủ đề: "Động lực học tập của sinh viên trong giáo dục về biến đổi khí hậu". Rèn luyện kỹ năng sàng lọc, tra cứu tài liệu chất lượng cao từ các cơ sở dữ liệu quốc tế lớn và thiết bộ lọc đánh giá độ tin cậy nghiêm ngặt.</p>
               </div>
               <div class="info-block">
                 <h5>Bài học đúc kết</h5>
@@ -1604,7 +1705,7 @@
             </div>
           </div>
 
-          <!-- Assignment 4 content -->
+          <!-- Assignment 4 content (HIGHLY DETAILED KANBAN & TASK VIEWER) -->
           <div class="project-pane" id="p4">
             <div class="pane-header">
               <h3>Hợp tác Trực tuyến & Quản lý Dự án Nhóm</h3>
@@ -1613,43 +1714,55 @@
             <div class="project-info-grid">
               <div class="info-block">
                 <h5>Mục tiêu học tập</h5>
-                <p>Thực hành làm việc nhóm từ xa để xây dựng dự án: "Cẩm nang phòng chống lừa đảo số cho tân sinh viên". Học cách phân chia công việc, theo dõi tiến độ trên các nền tảng quản trị và cộng tác soạn thảo nội dung theo thời gian thực.</p>
+                <p>Thực hành phương pháp quản trị và cộng tác từ xa để triển khai dự án nhóm xây dựng video/infographic truyền thông: <strong>"Cẩm nang phòng chống lừa đảo số cho tân sinh viên"</strong>. Học cách sử dụng công cụ điều phối, theo dõi tiến độ, phân chia tài nguyên khoa học trên không gian lưu trữ đám mây.</p>
               </div>
               <div class="info-block">
                 <h5>Bài học đúc kết</h5>
-                <p>Khó khăn lớn nhất khi làm việc trực tuyến không nằm ở công nghệ mà là sự đồng bộ thời gian biểu giữa các thành viên. Thống nhất một nền tảng giao tiếp chung và phân công rạch ròi thời hạn (deadline) chính là chìa khóa để giữ vững tiến độ nhóm.</p>
+                <p>Dù đối mặt với rào cản hạn chế thiết bị (phần lớn làm việc trên iPhone) và sự lệch pha trong khung thời gian sinh hoạt, việc phân rã mục tiêu thành các đầu việc nhỏ và đồng bộ trực tuyến liên tục đã giúp nhóm mình tối ưu hóa quy trình làm việc và về đích đúng hạn.</p>
               </div>
             </div>
 
-            <!-- Interactive Kanban Timeline -->
+            <!-- Interactive Kanban Board Simulator & Detailed Viewer -->
             <div class="process-section">
-              <h4><i class="fa-solid fa-users"></i> Lịch trình & Giao diện Trello của vai trò "Nghiên cứu nội dung" (Lướt ngang để xem)</h4>
-              <div class="kanban-flow">
-                <div class="kanban-card">
-                  <span class="day-badge">Ngày 1</span>
-                  <h6>Khởi động dự án</h6>
-                  <p>Thảo luận nhóm qua Zalo, thống nhất đề tài "Cẩm nang phòng chống lừa đảo số", phân công vai trò nghiên cứu, thống nhất cấu trúc infographic.</p>
+              <h4><i class="fa-solid fa-table-columns"></i> Bảng tiến độ Kanban Trello của Hải Chiều (Click để xem chi tiết)</h4>
+              
+              <div class="trello-board">
+                <!-- Column 1 -->
+                <div class="trello-column">
+                  <h5>Cần thực hiện</h5>
+                  <div class="trello-cards-list">
+                    <div class="trello-card" onclick="selectTrelloTask(5)">
+                      <h6>Giai đoạn 2: Khảo sát</h6>
+                      <p>Khảo sát mức độ nhận diện lừa đảo số của tân sinh viên sau tuyên truyền.</p>
+                      <span class="card-badge">Tương lai</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="kanban-card">
-                  <span class="day-badge">Ngày 2</span>
-                  <h6>Nghiên cứu cơ sở</h6>
-                  <p>Tra cứu thông tin tại Cổng an toàn thông tin quốc gia, tập hợp khái niệm và cơ chế lừa đảo: Phishing, Smishing, QR fraud.</p>
+                
+                <!-- Column 2 -->
+                <div class="trello-column">
+                  <h5>Đang tiến hành</h5>
+                  <div class="trello-cards-list">
+                    <div class="trello-card" onclick="selectTrelloTask(6)">
+                      <h6>Hỗ trợ thiết kế</h6>
+                      <p>Hỗ trợ nhóm thiết kế chuyển ngữ dữ liệu học thuật sang dạng ngôn ngữ hình ảnh.</p>
+                      <span class="card-badge">Đang chạy</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="kanban-card">
-                  <span class="day-badge">Ngày 3</span>
-                  <h6>Thu thập thực tế</h6>
-                  <p>Tổng hợp các ví dụ điển hình đã xảy ra tại Việt Nam như cuộc gọi giả mạo, dán đè mã QR, biên soạn bảng phân tích rủi ro trên Google Docs.</p>
+
+                <!-- Column 3 -->
+                <div class="trello-column">
+                  <h5>Đã hoàn thành</h5>
+                  <div class="trello-cards-list" id="trelloDoneList">
+                    <!-- Cards will be populated by JS -->
+                  </div>
                 </div>
-                <div class="kanban-card">
-                  <span class="day-badge">Ngày 4</span>
-                  <h6>Quy tắc ứng phó</h6>
-                  <p>Xây dựng hệ thống giải pháp "Quy tắc 5 Không" & "Quy tắc 3 Kiểm tra" làm nội dung nòng cốt cho tài liệu tuyên truyền học tập.</p>
-                </div>
-                <div class="kanban-card">
-                  <span class="day-badge">Ngày 5</span>
-                  <h6>Đồng bộ tài liệu</h6>
-                  <p>Sắp xếp tài nguyên khoa học trên Google Drive của nhóm, cập nhật trạng thái nhiệm vụ sang thẻ "Hoàn thành" trên Trello.</p>
-                </div>
+              </div>
+
+              <!-- Detailed Task Viewer Card -->
+              <div class="task-viewer" id="trelloTaskViewer">
+                <!-- Rendered dynamically by JS -->
               </div>
             </div>
 
@@ -1988,7 +2101,67 @@
       }
     ];
 
-    // --- DOM Elements & Event Listeners Implementation ---
+    // 4. Detailed Trello Kanban Data for Assignment 4
+    const trelloTasks = [
+      {
+        id: 0,
+        day: "Thứ Hai (Ngày 1)",
+        title: "Khởi động & Phân vai",
+        summary: "Thống nhất chủ đề và phân chia vai trò.",
+        desc: "Cả nhóm họp trực tuyến qua Zalo để lên ý tưởng làm infographic / video tuyên truyền. Nhận thấy tân sinh viên ULIS thường bỡ ngỡ và dễ bị dụ dỗ vào các bẫy tài chính ảo, nhóm thống nhất lựa chọn đề tài <strong>'Cẩm nang phòng chống lừa đảo số'</strong>. Mình được phân công làm <strong>Nghiên cứu nội dung (Content Researcher)</strong> chịu trách nhiệm lập dàn ý và tổng hợp thông tin thô.",
+        challenge: "Phải bàn bạc toàn bộ online, lệch múi giờ sinh hoạt của các thành viên nên mất nhiều thời gian để chốt kịch bản phân rã.",
+        input: "Ý tưởng tự do, các tài liệu hướng dẫn an ninh học đường.",
+        output: "Biên bản họp nhóm, bảng phân vai chi tiết, khung sườn Infographic sơ bộ."
+      },
+      {
+        id: 1,
+        day: "Thứ Ba (Ngày 2)",
+        title: "Nghiên cứu cơ sở lý thuyết",
+        summary: "Phân tích sâu Phishing, Smishing, Quishing.",
+        desc: "Mình dành thời gian tra cứu dữ liệu từ các website chính thống của <strong>Cổng thông tin an toàn thông tin quốc gia</strong> để định nghĩa chuẩn hóa và chỉ ra cơ chế hoạt động của các hình thức: <strong>Phishing (Giả mạo email)</strong>, <strong>Smishing (SMS lừa đảo)</strong>, và <strong>Quishing (Lừa đảo qua QR Code)</strong>. Toàn bộ kiến thức thô được ghi chép ngăn nắp trên tệp nháp Google Docs.",
+        challenge: "Nguồn dữ liệu mạng rất nhiều và tạp nham, khó khăn trong việc chọn lọc những kiến thức dễ hiểu và phù hợp nhất cho sinh viên mới.",
+        input: "Website bảo mật của chính phủ, các bài báo phân tích công nghệ.",
+        output: "Bản thảo lý thuyết chi tiết về 3 hình thức lừa đảo phổ biến trên Google Docs."
+      },
+      {
+        id: 2,
+        day: "Thứ Tư (Ngày 3)",
+        title: "Thu thập ví dụ thực tế học đường",
+        summary: "Lập bảng đối chiếu thực trạng tại Việt Nam.",
+        desc: "Để cẩm nang mang tính thực tiễn cao, mình đã tìm kiếm các trường hợp lừa đảo học đường điển hình diễn ra gần đây tại Việt Nam. Mình thiết lập một bảng đối chiếu chi tiết gồm 3 cột: <strong>Hình thức lừa đảo, Ví dụ cụ thể và Hậu quả trực tiếp</strong>. Ví dụ thực tế: Kẻ gian gửi email mạo danh phòng đào tạo ULIS yêu cầu cập nhật thông tin học tập, hay dán đè mã QR thanh toán giả mạo tại căng-tin trường học.",
+        challenge: "Tìm kiếm các vụ việc có thật liên quan trực tiếp đến đời sống sinh viên để tăng tính thuyết phục chứ không lấy ví dụ vĩ mô của doanh nghiệp.",
+        input: "Tin tức báo chí, diễn đàn cảnh giác sinh viên.",
+        output: "Bảng đối chiếu 'Hình thức - Ví dụ - Hậu quả' hoàn thiện trên Google Docs."
+      },
+      {
+        id: 3,
+        day: "Thứ Năm (Ngày 4)",
+        title: "Xây dựng cẩm nang ứng phó",
+        summary: "Đúc kết bộ quy tắc '5 Không & 3 Kiểm tra'.",
+        desc: "Dựa trên những phân tích lý thuyết và thực tiễn, mình tiến hành đúc kết và chuyển hóa tri thức thành hành động cụ thể thông qua hai bộ quy tắc ngắn gọn, dễ nhớ: <strong>Quy tắc 5 KHÔNG</strong> (Không nhấp liên kết lạ, Không chia sẻ OTP, Không cung cấp mật khẩu, Không quét QR lạ, Không chuyển khoản khi chưa xác minh) và <strong>Quy tắc 3 KIỂM TRA</strong> (Kiểm tra người gửi, Kiểm tra đường dẫn, Kiểm tra nguồn tin).",
+        challenge: "Làm thế nào để chuyển đổi các thuật ngữ bảo mật khô khan thành những khẩu hiệu hành động trực quan, ngắn gọn, dễ thuộc lòng.",
+        input: "Bản thảo lý thuyết & ví dụ thu tập được từ các ngày trước.",
+        output: "Bộ giải pháp bảo mật hoàn thiện để gửi cho các bạn thiết kế đồ họa."
+      },
+      {
+        id: 4,
+        day: "Chủ Nhật (Ngày 5)",
+        title: "Đồng bộ Drive & Đóng thẻ",
+        summary: "Sắp xếp hệ thống thư mục đám mây.",
+        desc: "Mình thực hiện số hóa toàn bộ kết quả nghiên cứu thành tệp tin Word định dạng chuẩn hóa <code>NMCNS_BT-N.docx</code>. Tiếp theo, mình truy cập Google Drive của nhóm, tạo thư mục con 'Thongtin' bên trong thư mục gốc 'NMCNS_N42' để lưu trữ tệp tin. Đồng thời, mình cập nhật tiến độ công việc, tải lên ảnh chụp minh chứng hoạt động và thực hiện đóng thẻ nhiệm vụ trên bảng Trello của nhóm.",
+        challenge: "Hạn chế thao tác trên điện thoại khiến việc định dạng tệp tin Word và tải lên Drive của nhóm gặp đôi chút bất tiện về giao diện.",
+        input: "Tệp tin hoàn thiện, tài khoản Google Drive & Trello nhóm.",
+        output: "Hệ thống lưu trữ thư mục Drive ngăn nắp, bảng tiến độ Trello hiển thị trạng thái hoàn tất."
+      }
+    ];
+
+    // Dummy future/doing tasks for Trello Board
+    const fallbackTasks = [
+      { id: 5, day: "Tương lai (Giai đoạn 2)", title: "Khảo sát diện rộng", summary: "Khảo sát mức độ nhận diện lừa đảo của sinh viên sau khi cẩm nang được phát hành học đường.", challenge: "Cần xây dựng bảng hỏi Google Forms tối ưu.", input: "Cẩm nang đã phát hành", output: "Mẫu khảo sát trực tuyến" },
+      { id: 6, day: "Hiện tại", title: "Hỗ trợ dịch thuật", summary: "Hỗ trợ chuyển ngữ cẩm nang sang phiên bản tiếng Anh cho sinh viên quốc tế.", challenge: "Sử dụng chính xác thuật ngữ bảo mật tiếng Anh.", input: "Bản dịch thô", output: "Bản dịch học thuật hoàn chỉnh" }
+    ];
+
+    // --- Interactive Logic Engines ---
 
     // 1. Init Assignment 1 Steps
     const stepHeader = document.getElementById('stepHeader');
@@ -2114,6 +2287,61 @@
       }, 200);
     }
 
+    // 4. Interactive Trello Kanban Engine for Assignment 4 (XỊN XÒ)
+    const trelloDoneList = document.getElementById('trelloDoneList');
+    const trelloTaskViewer = document.getElementById('trelloTaskViewer');
+
+    function renderTrelloDoneCards() {
+      trelloDoneList.innerHTML = '';
+      trelloTasks.forEach((task, idx) => {
+        const card = document.createElement('div');
+        card.className = `trello-card ${idx === 0 ? 'active' : ''}`;
+        card.setAttribute('data-id', task.id);
+        card.onclick = () => selectTrelloTask(task.id);
+        card.innerHTML = `
+          <h6>Ngày ${idx + 1}: ${task.title}</h6>
+          <p>${task.summary}</p>
+          <span class="card-badge">Đã xong</span>
+        `;
+        trelloDoneList.appendChild(card);
+      });
+      displayTrelloTask(0); // display first task by default
+    }
+
+    function selectTrelloTask(id) {
+      // Remove active class from all trello cards
+      const cards = document.querySelectorAll('.trello-card');
+      cards.forEach(card => card.classList.remove('active'));
+
+      // Add active to current clicked card
+      const targetCard = document.querySelector(`.trello-card[data-id="${id}"]`);
+      if (targetCard) targetCard.classList.add('active');
+
+      displayTrelloTask(id);
+    }
+
+    function displayTrelloTask(id) {
+      let task = trelloTasks.find(t => t.id === id);
+      if (!task) task = fallbackTasks.find(t => t.id === id);
+
+      trelloTaskViewer.style.opacity = '0';
+      setTimeout(() => {
+        trelloTaskViewer.innerHTML = `
+          <h4><i class="fa-regular fa-clipboard"></i> Đầu việc chi tiết: ${task.title}</h4>
+          <div class="viewer-body">
+            <p><strong>Thời gian thực hiện:</strong> ${task.day}</p>
+            <p><strong>Nội dung & Cách thức triển khai:</strong> ${task.desc}</p>
+            <p><strong>Thử thách gặp phải & Cách xử lý:</strong> ${task.challenge}</p>
+          </div>
+          <div class="viewer-meta">
+            <span><i class="fa-solid fa-arrow-right-to-bracket"></i> Input: ${task.input}</span>
+            <span><i class="fa-solid fa-arrow-right-from-bracket"></i> Output: ${task.output}</span>
+          </div>
+        `;
+        trelloTaskViewer.style.opacity = '1';
+      }, 150);
+    }
+
     function escapeHTML(str) {
       return str.replace(/[&<>'"]/g, 
         tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
@@ -2125,6 +2353,7 @@
       renderSteps();
       renderTable();
       renderPromptSelector();
+      renderTrelloDoneCards();
     });
 
     // --- Custom Cursor Tracking ---
@@ -2140,7 +2369,7 @@
     });
 
     // Scale cursor on hoverable elements
-    const hoverables = document.querySelectorAll('a, button, .tab-btn, .artifact-card, .step-btn, .filter-btn, .prompt-task-btn, .rule-item');
+    const hoverables = document.querySelectorAll('a, button, .tab-btn, .artifact-card, .step-btn, .filter-btn, .prompt-task-btn, .rule-item, .trello-card');
     hoverables.forEach(item => {
       item.addEventListener('mouseenter', () => {
         cursor.style.width = '44px';
