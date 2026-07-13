@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dương Thị Hải Chiều | Digital Hub & Portfolio</title>
+  <title>Dương Thị Hải Chiều Portfolio</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,26 +82,34 @@
 
     /* --- Custom Scrollbars for scrollable elements (Xịn xò) --- */
     .stepper-header::-webkit-scrollbar,
-    .trello-cards-list::-webkit-scrollbar,
-    .prompt-text::-webkit-scrollbar {
+    .kanban-flow::-webkit-scrollbar,
+    .prompt-text::-webkit-scrollbar,
+    .docs-editor-sheet::-webkit-scrollbar,
+    .docs-comment-sidebar::-webkit-scrollbar {
       height: 6px;
       width: 4px;
     }
     .stepper-header::-webkit-scrollbar-track,
-    .trello-cards-list::-webkit-scrollbar-track,
-    .prompt-text::-webkit-scrollbar-track {
+    .kanban-flow::-webkit-scrollbar-track,
+    .prompt-text::-webkit-scrollbar-track,
+    .docs-editor-sheet::-webkit-scrollbar-track,
+    .docs-comment-sidebar::-webkit-scrollbar-track {
       background: rgba(255, 255, 255, 0.02);
       border-radius: 3px;
     }
     .stepper-header::-webkit-scrollbar-thumb,
-    .trello-cards-list::-webkit-scrollbar-thumb,
-    .prompt-text::-webkit-scrollbar-thumb {
+    .kanban-flow::-webkit-scrollbar-thumb,
+    .prompt-text::-webkit-scrollbar-thumb,
+    .docs-editor-sheet::-webkit-scrollbar-thumb,
+    .docs-comment-sidebar::-webkit-scrollbar-thumb {
       background: rgba(255, 159, 28, 0.35);
       border-radius: 3px;
     }
     .stepper-header::-webkit-scrollbar-thumb:hover,
-    .trello-cards-list::-webkit-scrollbar-thumb:hover,
-    .prompt-text::-webkit-scrollbar-thumb:hover {
+    .kanban-flow::-webkit-scrollbar-thumb:hover,
+    .prompt-text::-webkit-scrollbar-thumb:hover,
+    .docs-editor-sheet::-webkit-scrollbar-thumb:hover,
+    .docs-comment-sidebar::-webkit-scrollbar-thumb:hover {
       background: rgba(255, 159, 28, 0.65);
     }
 
@@ -717,9 +725,9 @@
       word-wrap: break-word;
     }
 
-    /* --- Interactive Features (Sửa lỗi hiển thị & Nâng cao) --- */
+    /* --- Interactive Features --- */
 
-    /* Bài 1: Stepper */
+    /* Bài 1: Stepper (Sửa lỗi lướt ngang và scrollbar) */
     .stepper-container {
       display: flex;
       flex-direction: column;
@@ -806,7 +814,7 @@
       border-radius: 20px;
       font-size: 0.85rem;
       cursor: pointer;
-      transition: all 0.3;
+      transition: all 0.3s;
     }
 
     .filter-btn.active {
@@ -948,148 +956,266 @@
       color: #ffffff;
     }
 
-    /* --- BÀI 4: INTERACTIVE TRELLO KANBAN BOARD SIMULATOR (XỊN XÒ) --- */
-    .trello-board {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    /* Bài 4: Kanban Progress Timeline (SỬA LỖI SQUISH & TRÀN VIỀN BẰNG NGANG CUỘN) */
+    .kanban-flow {
+      display: flex;
       gap: 1.2rem;
-      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      padding: 0.5rem 0.5rem 1.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
       width: 100%;
     }
 
-    .trello-column {
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    .trello-column h5 {
-      font-family: var(--font-sub);
-      font-size: 0.88rem;
-      color: var(--color-accent-cyan);
-      border-bottom: 2px solid rgba(46, 196, 182, 0.15);
-      padding-bottom: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    .trello-cards-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      max-height: 380px;
-      overflow-y: auto;
-      padding-right: 0.3rem;
-    }
-
-    .trello-card {
+    .kanban-card {
+      flex: 0 0 280px; /* Fixed width prevents blowout and lets items scroll beautifully */
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 1rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
+      border-radius: 12px;
+      padding: 1.2rem;
       position: relative;
+      scroll-snap-align: start;
     }
 
-    .trello-card:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: var(--color-accent-orange);
-      transform: translateY(-2px);
-    }
-
-    .trello-card.active {
-      border-color: var(--color-accent-orange);
-      background: rgba(255, 159, 28, 0.06);
-      box-shadow: 0 4px 15px rgba(255, 159, 28, 0.08);
-    }
-
-    .trello-card h6 {
+    .kanban-card h6 {
       font-family: var(--font-sub);
       font-size: 0.88rem;
-      color: #ffffff;
-      margin-bottom: 0.4rem;
+      color: var(--color-accent-orange);
+      margin-bottom: 0.5rem;
     }
 
-    .trello-card p {
-      font-size: 0.78rem;
+    .kanban-card p {
+      font-size: 0.82rem;
       color: var(--color-text-sub);
-      line-height: 1.4;
       text-align: justify;
     }
 
-    .trello-card .card-badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 10px;
-      background: rgba(46, 196, 182, 0.15);
-      color: var(--color-accent-cyan);
-      margin-top: 0.6rem;
+    .kanban-card .day-badge {
+      position: absolute;
+      top: -10px;
+      right: 10px;
+      background: var(--color-accent-cyan);
+      color: #030712;
+      font-size: 0.7rem;
       font-weight: bold;
+      padding: 0.1rem 0.5rem;
+      border-radius: 10px;
     }
 
-    /* Detailed Task Viewer Block */
-    .task-viewer {
-      background: rgba(255, 255, 255, 0.015);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 16px;
-      padding: 1.8rem;
-      margin-top: 1.2rem;
-      animation: fadeInPane 0.4s forwards;
+    /* --- Bài 4: Google Drive & Google Docs Simulators (XỊN XÒ) --- */
+    .collab-visualizer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
       width: 100%;
     }
 
-    .task-viewer h4 {
+    /* Drive Simulator */
+    .drive-explorer {
+      background: rgba(5, 10, 24, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+    .drive-explorer h5 {
       font-family: var(--font-sub);
-      font-size: 1.15rem;
-      color: var(--color-accent-orange);
+      font-size: 1rem;
+      color: #ffffff;
       margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.5rem;
     }
-
-    .task-viewer h4 i {
-      font-size: 1.2rem;
+    .drive-tree {
+      list-style: none;
+      padding-left: 0;
     }
-
-    .task-viewer .viewer-body {
-      font-size: 0.94rem;
-      color: var(--color-text-sub);
-      text-align: justify;
+    .drive-item {
+      margin: 0.6rem 0;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.88rem;
     }
-
-    .task-viewer .viewer-body p {
-      margin-bottom: 1rem;
+    .drive-item i {
+      margin-right: 0.5rem;
+      color: #ffd166;
     }
-
-    .task-viewer .viewer-body strong {
-      color: #ffffff;
+    .drive-subfolder {
+      list-style: none;
+      padding-left: 1.5rem;
+      display: none;
+      border-left: 1px dashed rgba(255, 255, 255, 0.1);
+      margin-left: 0.5rem;
+      animation: fadeInPane 0.3s forwards;
     }
-
-    .task-viewer .viewer-meta {
-      display: flex;
-      gap: 2rem;
+    .drive-subfolder.open {
+      display: block;
+    }
+    .drive-file {
       font-size: 0.82rem;
-      color: var(--color-accent-cyan);
-      font-weight: bold;
-      margin-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 1rem;
-    }
-
-    .task-viewer .viewer-meta span {
+      color: var(--color-text-sub);
+      padding: 0.3rem 0;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
+    }
+    .drive-file i {
+      color: var(--color-accent-cyan) !important;
     }
 
-    /* --- BÀI 5: GenAI visual pipeline --- */
+    /* Google Docs Simulator */
+    .docs-simulator {
+      background: #ffffff;
+      color: #202124;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .docs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #dadce0;
+      padding-bottom: 0.8rem;
+    }
+    .docs-title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .docs-title-wrapper i {
+      color: #1a73e8;
+      font-size: 1.5rem;
+    }
+    .docs-title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #202124;
+    }
+    .docs-avatar-group {
+      display: flex;
+      gap: -5px;
+    }
+    .docs-user-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
+    }
+    .user-hc { background: #e91e63; margin-right: -6px; }
+    .user-pt { background: #1a73e8; }
+
+    .docs-workspace-layout {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 1.2rem;
+      height: 250px;
+    }
+    .docs-editor-sheet {
+      background: #f8f9fa;
+      border: 1px solid #e8eaed;
+      border-radius: 8px;
+      padding: 1.2rem;
+      font-size: 0.82rem;
+      overflow-y: auto;
+      text-align: justify;
+      color: #3c4043;
+    }
+    .docs-editor-sheet h6 {
+      font-weight: bold;
+      color: #202124;
+      margin-bottom: 0.4rem;
+      font-size: 0.88rem;
+    }
+    .docs-editor-sheet p {
+      margin-bottom: 0.8rem;
+    }
+    .docs-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1rem;
+      background: #e91e63;
+      position: relative;
+      vertical-align: middle;
+      animation: docBlink 1s infinite;
+      margin-left: 2px;
+    }
+    .docs-cursor::after {
+      content: 'Hải Chiều';
+      position: absolute;
+      top: -12px;
+      left: 0;
+      background: #e91e63;
+      color: #ffffff;
+      font-size: 0.55rem;
+      padding: 0.1rem 0.25rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      font-family: var(--font-body);
+    }
+    @keyframes docBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .docs-comment-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      overflow-y: auto;
+    }
+    .docs-comment-card {
+      background: #f1f3f4;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      padding: 0.8rem;
+      font-size: 0.76rem;
+      color: #3c4043;
+      animation: fadeInPane 0.4s forwards;
+    }
+    .comment-meta {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+    .comment-author {
+      color: #e91e63;
+    }
+    .comment-author.leader {
+      color: #1a73e8;
+    }
+    .btn-resolve {
+      margin-top: 0.6rem;
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      cursor: pointer;
+      font-weight: bold;
+      color: #1a73e8;
+      transition: all 0.2s;
+    }
+    .btn-resolve:hover {
+      background: #f1f3f4;
+      border-color: #1a73e8;
+    }
+
+    /* Bài 5: GenAI visual pipeline */
     .ai-pipeline {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1125,7 +1251,7 @@
       text-align: justify;
     }
 
-    /* --- BÀI 6: RMIT vs VinUni Compare & Golden Rules Flip cards --- */
+    /* Bài 6: RMIT vs VinUni Compare & Golden Rules Flip cards */
     .policy-compare {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1401,10 +1527,7 @@
       .reflection-grid {
         grid-template-columns: 1fr;
       }
-    }
-
-    @media (max-width: 800px) {
-      .trello-board {
+      .collab-visualizer-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1447,6 +1570,9 @@
       .badge-mssv {
         left: -5%;
         bottom: 8%;
+      }
+      .rules-grid {
+        grid-template-columns: 1fr;
       }
       footer {
         flex-direction: column;
@@ -1619,7 +1745,7 @@
             <div class="project-info-grid">
               <div class="info-block">
                 <h5>Mục tiêu học tập</h5>
-                <p>Nghiên cứu sâu về chủ đề: "Động lực học tập của sinh viên trong giáo dục về biến đổi khí hậu". Rèn luyện kỹ năng sàng lọc, tra cứu tài liệu chất lượng cao từ các cơ sở dữ liệu quốc tế lớn và thiết bộ lọc đánh giá độ tin cậy nghiêm ngặt.</p>
+                <p>Nghiên cứu sâu về chủ đề: "Động lực học tập của sinh viên trong giáo dục về biến đổi khí hậu". Rèn luyện kỹ năng sàng lọc, tra cứu tài liệu chất lượng cao từ các cơ sở dữ liệu quốc tế lớn và thiết lập bộ lọc đánh giá độ tin cậy nghiêm ngặt.</p>
               </div>
               <div class="info-block">
                 <h5>Bài học đúc kết</h5>
@@ -1705,7 +1831,7 @@
             </div>
           </div>
 
-          <!-- Assignment 4 content (HIGHLY DETAILED KANBAN & TASK VIEWER) -->
+          <!-- Assignment 4 content (MỞ RỘNG CHI TIẾT ĐỐI VỚI GOOGLE DRIVE & GOOGLE DOCS) -->
           <div class="project-pane" id="p4">
             <div class="pane-header">
               <h3>Hợp tác Trực tuyến & Quản lý Dự án Nhóm</h3>
@@ -1713,56 +1839,137 @@
             </div>
             <div class="project-info-grid">
               <div class="info-block">
-                <h5>Mục tiêu học tập</h5>
-                <p>Thực hành phương pháp quản trị và cộng tác từ xa để triển khai dự án nhóm xây dựng video/infographic truyền thông: <strong>"Cẩm nang phòng chống lừa đảo số cho tân sinh viên"</strong>. Học cách sử dụng công cụ điều phối, theo dõi tiến độ, phân chia tài nguyên khoa học trên không gian lưu trữ đám mây.</p>
+                <h5>Cộng tác trên Google Docs</h5>
+                <p>Tận dụng triệt để tính năng cộng tác đám mây. Nhóm biên soạn nội dung trên tệp <strong>[Nhóm 42] Nội Dung Chi Tiết - Cẩm Nang Phòng Chống Lừa Đảo Số</strong>. Việc viết song song giúp loại bỏ xung đột phiên bản như cách gửi tệp Word truyền thống. Tính năng <strong>Lịch sử phiên bản (Version History)</strong> giúp khôi phục các chỉnh sửa lỡ tay xóa nhầm, đồng thời ghi nhận đóng góp rõ ràng của từng người. Nhóm sử dụng <strong>Suggesting Mode (Đề xuất)</strong> để Hải Chiều và mọi người kiểm duyệt câu từ chéo, và hệ thống <strong>Gắn thẻ bình luận (@mention)</strong> để phân công công việc sửa đổi tức thời.</p>
               </div>
               <div class="info-block">
-                <h5>Bài học đúc kết</h5>
-                <p>Dù đối mặt với rào cản hạn chế thiết bị (phần lớn làm việc trên iPhone) và sự lệch pha trong khung thời gian sinh hoạt, việc phân rã mục tiêu thành các đầu việc nhỏ và đồng bộ trực tuyến liên tục đã giúp nhóm mình tối ưu hóa quy trình làm việc và về đích đúng hạn.</p>
+                <h5>Quản trị tài nguyên trên Google Drive</h5>
+                <p>Hải Chiều thiết lập một cấu trúc cây thư mục cực kỳ khoa học để làm việc nhóm. Quyền hạn truy cập của tệp tin được phân lớp chặt chẽ: Trưởng nhóm sở hữu (Owner), các thành viên có quyền chỉnh sửa (Editor) để cập nhật dữ liệu, và liên kết chia sẻ dạng xem (Viewer) được thiết lập riêng cho Giảng viên đánh giá. Hệ thống thư mục được tổ chức theo quy chuẩn thống nhất không dấu, phân chia rạch ròi giữa tài nguyên thô, bản nháp tài liệu của Google Docs và thư mục chứa hình ảnh thiết kế.</p>
               </div>
             </div>
 
-            <!-- Interactive Kanban Board Simulator & Detailed Viewer -->
+            <!-- Kanban timeline list -->
             <div class="process-section">
-              <h4><i class="fa-solid fa-table-columns"></i> Bảng tiến độ Kanban Trello của Hải Chiều (Click để xem chi tiết)</h4>
-              
-              <div class="trello-board">
-                <!-- Column 1 -->
-                <div class="trello-column">
-                  <h5>Cần thực hiện</h5>
-                  <div class="trello-cards-list">
-                    <div class="trello-card" onclick="selectTrelloTask(5)">
-                      <h6>Giai đoạn 2: Khảo sát</h6>
-                      <p>Khảo sát mức độ nhận diện lừa đảo số của tân sinh viên sau tuyên truyền.</p>
-                      <span class="card-badge">Tương lai</span>
-                    </div>
-                  </div>
+              <h4><i class="fa-solid fa-list-check"></i> Sơ đồ Kanban & Lịch trình 5 ngày của vai trò "Nghiên cứu nội dung" (Cuộn ngang để xem)</h4>
+              <div class="kanban-flow">
+                <div class="kanban-card">
+                  <span class="day-badge">Ngày 1</span>
+                  <h6>Khởi động dự án</h6>
+                  <p>Họp nhóm trên Zalo, thống nhất đề tài "Cẩm nang phòng chống lừa đảo số", phân công vai trò nghiên cứu, thống nhất cấu trúc tài liệu của Google Docs.</p>
                 </div>
-                
-                <!-- Column 2 -->
-                <div class="trello-column">
-                  <h5>Đang tiến hành</h5>
-                  <div class="trello-cards-list">
-                    <div class="trello-card" onclick="selectTrelloTask(6)">
-                      <h6>Hỗ trợ thiết kế</h6>
-                      <p>Hỗ trợ nhóm thiết kế chuyển ngữ dữ liệu học thuật sang dạng ngôn ngữ hình ảnh.</p>
-                      <span class="card-badge">Đang chạy</span>
-                    </div>
-                  </div>
+                <div class="kanban-card">
+                  <span class="day-badge">Ngày 2</span>
+                  <h6>Nghiên cứu cơ sở</h6>
+                  <p>Tra cứu thông tin từ Cổng an toàn thông tin quốc gia, tập hợp lý thuyết cốt lõi về Phishing, Smishing, QR Scam viết trực tiếp lên Google Docs nhóm.</p>
                 </div>
-
-                <!-- Column 3 -->
-                <div class="trello-column">
-                  <h5>Đã hoàn thành</h5>
-                  <div class="trello-cards-list" id="trelloDoneList">
-                    <!-- Cards will be populated by JS -->
-                  </div>
+                <div class="kanban-card">
+                  <span class="day-badge">Ngày 3</span>
+                  <h6>Ví dụ thực tế</h6>
+                  <p>Tìm kiếm và chụp ảnh các minh chứng thực tế lừa đảo giả mạo tại Việt Nam, tải lên thư mục Drive nhóm, đồng thời gắn thẻ thảo luận trên bản thảo Docs.</p>
+                </div>
+                <div class="kanban-card">
+                  <span class="day-badge">Ngày 4</span>
+                  <h6>Quy tắc ứng phó</h6>
+                  <p>Xây dựng hệ thống giải pháp "Quy tắc 5 Không" & "Quy tắc 3 Kiểm tra" làm nội dung cốt lõi cho cẩm nang, kiểm duyệt chéo qua Suggesting Mode.</p>
+                </div>
+                <div class="kanban-card">
+                  <span class="day-badge">Ngày 5</span>
+                  <h6>Đồng bộ đám mây</h6>
+                  <p>Sắp xếp gọn gàng toàn bộ tài nguyên nghiên cứu trên Google Drive nhóm, cập nhật trạng thái các thẻ việc trên Trello sang "Hoàn thành".</p>
                 </div>
               </div>
+            </div>
 
-              <!-- Detailed Task Viewer Card -->
-              <div class="task-viewer" id="trelloTaskViewer">
-                <!-- Rendered dynamically by JS -->
+            <!-- INTERACTIVE SIMULATORS FOR DRIVE & DOCS (XỊN XÒ) -->
+            <div class="process-section">
+              <h4><i class="fa-solid fa-desktop"></i> Minh họa quy trình cộng tác tương tác trên Google Drive & Google Docs</h4>
+              <div class="collab-visualizer-grid">
+                
+                <!-- Google Drive Explorer Simulation -->
+                <div class="drive-explorer">
+                  <h5><i class="fa-brands fa-google-drive"></i> Shared Drive Explorer (Nhấp vào thư mục để mở rộng)</h5>
+                  <ul class="drive-tree">
+                    <li class="drive-item" onclick="toggleDriveFolder('f1')">
+                      <i class="fa-solid fa-folder"></i> <strong>[Nhom 42] Du An Cam Nang Lua Dao So</strong>
+                      <ul class="drive-subfolder open" id="f1">
+                        <li class="drive-item" onclick="toggleDriveFolder('f2'); event.stopPropagation();">
+                          <i class="fa-solid fa-folder"></i> 01_TaiLieuNghienCuu
+                          <ul class="drive-subfolder" id="f2">
+                            <li class="drive-file"><i class="fa-solid fa-file-pdf"></i> Luat_An_Ninh_Mang_2018.pdf</li>
+                            <li class="drive-file"><i class="fa-solid fa-file-pdf"></i> Bao_Cao_Cybersecurity_2025.pdf</li>
+                            <li class="drive-item" onclick="toggleDriveFolder('f3'); event.stopPropagation();">
+                              <i class="fa-solid fa-folder"></i> Screenshots_MinhHoa
+                              <ul class="drive-subfolder" id="f3">
+                                <li class="drive-file"><i class="fa-solid fa-file-image"></i> Email_Gia_Mao_ULIS.png</li>
+                                <li class="drive-file"><i class="fa-solid fa-file-image"></i> Smishing_Gia_Mao_Vietcombank.png</li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="drive-item" onclick="toggleDriveFolder('f4'); event.stopPropagation();">
+                          <i class="fa-solid fa-folder"></i> 02_NoiDung_Drafts
+                          <ul class="drive-subfolder open" id="f4">
+                            <li class="drive-file"><i class="fa-solid fa-file-word"></i> [Nhom 42] Noi Dung Chi Tiet - Cam Nang Phong Chong Lua Dao So.gdoc</li>
+                          </ul>
+                        </li>
+                        <li class="drive-item" onclick="toggleDriveFolder('f5'); event.stopPropagation();">
+                          <i class="fa-solid fa-folder"></i> 03_SanPhamHoanThien
+                          <ul class="drive-subfolder" id="f5">
+                            <li class="drive-file"><i class="fa-solid fa-file-pdf"></i> Cam_Nang_Lua_Dao_So_Freshmen.pdf</li>
+                            <li class="drive-file"><i class="fa-solid fa-file-video"></i> Video_Slide_Thuyet_Trinh.mp4</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Google Docs Workspace Simulation -->
+                <div class="docs-simulator">
+                  <div class="docs-header">
+                    <div class="docs-title-wrapper">
+                      <i class="fa-solid fa-file-lines"></i>
+                      <span class="docs-title">[Nhóm 42] Nội Dung Chi Tiết - Cẩm Nang...</span>
+                    </div>
+                    <div class="docs-avatar-group">
+                      <div class="docs-user-dot user-hc" title="Hải Chiều">HC</div>
+                      <div class="docs-user-dot user-pt" title="Phương Thư (Trưởng nhóm)">PT</div>
+                    </div>
+                  </div>
+                  
+                  <div class="docs-workspace-layout">
+                    <!-- Sheet Content -->
+                    <div class="docs-editor-sheet">
+                      <h6>Phần 1: Lừa đảo qua Email giả mạo (Phishing)</h6>
+                      <p>Kẻ gian thường sử dụng các địa chỉ email có tên miền gần giống tên miền chính thức của nhà trường (ví dụ: phongdaotao.ulis@gmail.com thay vì @vnu.edu.vn) để gửi thông báo yêu cầu tân sinh viên cập nhật thông tin học tập gấp.<span class="docs-cursor"></span></p>
+                      
+                      <h6>Phần 2: Lừa đảo qua SMS (Smishing)</h6>
+                      <p>Tin nhắn thương hiệu (Brandname) ngân hàng giả mạo gửi kèm link độc hại có dạng như: vietcombank-verify.com. Khi sinh viên nhấp vào và nhập mã OTP, tài khoản sẽ bị kiểm soát hoàn toàn.</p>
+                    </div>
+
+                    <!-- Docs Comment Balloon Area -->
+                    <div class="docs-comment-sidebar" id="commentSidebar">
+                      <div class="docs-comment-card" id="comment1">
+                        <div class="comment-meta">
+                          <span class="comment-author">Hải Chiều</span>
+                          <span>2 ngày trước</span>
+                        </div>
+                        <p>@Phương Thư ơi, mình vừa cập nhật phần ví dụ Phishing email thực tế từ nhà trường, bạn kiểm tra xem có cần bổ sung gì không nhé.</p>
+                        <button class="btn-resolve" onclick="resolveComment('comment1')">Giải quyết (Resolve)</button>
+                      </div>
+
+                      <div class="docs-comment-card" id="comment2">
+                        <div class="comment-meta">
+                          <span class="comment-author leader">Phương Thư</span>
+                          <span>1 ngày trước</span>
+                        </div>
+                        <p>Tuyệt vời Hải Chiều ơi! Đoạn ví dụ Smishing tin nhắn rất trực quan, mình vừa duyệt đề xuất của bạn vào văn bản chính thức rồi nhé.</p>
+                        <button class="btn-resolve" onclick="resolveComment('comment2')">Giải quyết (Resolve)</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -2088,11 +2295,11 @@
         task: "Tác vụ 3: Tạo bộ câu hỏi ôn tập",
         basic: {
           prompt: "Tạo câu hỏi ôn tập về biến đổi khí hậu.",
-          effect: "AI chỉ đưa ra một danh sách câu hỏi tự luận cơ bản, thiếu sự đa dạng về mặt định dạng và các cấp độ tư duy."
+          effect: "AI chỉ định nghĩa lý thuyết ngắn gọn, thiếu sự đa dạng về định dạng câu hỏi và cấp độ tư duy."
         },
         improved: {
           prompt: "Hãy tạo 10 câu hỏi ôn tập về biến đổi khí hậu cho học sinh THPT. Bao gồm: 5 câu trắc nghiệm, 3 câu trả lời ngắn, 2 câu tự luận. Kèm đáp án.",
-          effect: "Bộ câu hỏi đã được phân loại định dạng rõ ràng và có sẵn đáp án đối chiếu trực quan, hữu ích cho hoạt động tự học."
+          effect: "Bộ câu hỏi đã được phân loại rõ ràng và có sẵn đáp án đối chiếu trực quan, hữu ích cho hoạt động tự học."
         },
         advanced: {
           prompt: "Bạn là giáo viên IELTS đang thiết kế bài ôn tập về chủ đề climate change. Hãy:\n1. Tạo 5 câu trắc nghiệm kiểm tra kiến thức cơ bản.\n2. Tạo 3 câu hỏi phân tích nguyên nhân và hậu quả.\n3. Tạo 2 câu hỏi tư duy phản biện.\n4. Cung cấp đáp án và giải thích ngắn cho từng câu.\nYêu cầu: sử dụng từ vựng học thuật, độ khó tăng dần, phù hợp trình độ B2-C1.",
@@ -2101,67 +2308,7 @@
       }
     ];
 
-    // 4. Detailed Trello Kanban Data for Assignment 4
-    const trelloTasks = [
-      {
-        id: 0,
-        day: "Thứ Hai (Ngày 1)",
-        title: "Khởi động & Phân vai",
-        summary: "Thống nhất chủ đề và phân chia vai trò.",
-        desc: "Cả nhóm họp trực tuyến qua Zalo để lên ý tưởng làm infographic / video tuyên truyền. Nhận thấy tân sinh viên ULIS thường bỡ ngỡ và dễ bị dụ dỗ vào các bẫy tài chính ảo, nhóm thống nhất lựa chọn đề tài <strong>'Cẩm nang phòng chống lừa đảo số'</strong>. Mình được phân công làm <strong>Nghiên cứu nội dung (Content Researcher)</strong> chịu trách nhiệm lập dàn ý và tổng hợp thông tin thô.",
-        challenge: "Phải bàn bạc toàn bộ online, lệch múi giờ sinh hoạt của các thành viên nên mất nhiều thời gian để chốt kịch bản phân rã.",
-        input: "Ý tưởng tự do, các tài liệu hướng dẫn an ninh học đường.",
-        output: "Biên bản họp nhóm, bảng phân vai chi tiết, khung sườn Infographic sơ bộ."
-      },
-      {
-        id: 1,
-        day: "Thứ Ba (Ngày 2)",
-        title: "Nghiên cứu cơ sở lý thuyết",
-        summary: "Phân tích sâu Phishing, Smishing, Quishing.",
-        desc: "Mình dành thời gian tra cứu dữ liệu từ các website chính thống của <strong>Cổng thông tin an toàn thông tin quốc gia</strong> để định nghĩa chuẩn hóa và chỉ ra cơ chế hoạt động của các hình thức: <strong>Phishing (Giả mạo email)</strong>, <strong>Smishing (SMS lừa đảo)</strong>, và <strong>Quishing (Lừa đảo qua QR Code)</strong>. Toàn bộ kiến thức thô được ghi chép ngăn nắp trên tệp nháp Google Docs.",
-        challenge: "Nguồn dữ liệu mạng rất nhiều và tạp nham, khó khăn trong việc chọn lọc những kiến thức dễ hiểu và phù hợp nhất cho sinh viên mới.",
-        input: "Website bảo mật của chính phủ, các bài báo phân tích công nghệ.",
-        output: "Bản thảo lý thuyết chi tiết về 3 hình thức lừa đảo phổ biến trên Google Docs."
-      },
-      {
-        id: 2,
-        day: "Thứ Tư (Ngày 3)",
-        title: "Thu thập ví dụ thực tế học đường",
-        summary: "Lập bảng đối chiếu thực trạng tại Việt Nam.",
-        desc: "Để cẩm nang mang tính thực tiễn cao, mình đã tìm kiếm các trường hợp lừa đảo học đường điển hình diễn ra gần đây tại Việt Nam. Mình thiết lập một bảng đối chiếu chi tiết gồm 3 cột: <strong>Hình thức lừa đảo, Ví dụ cụ thể và Hậu quả trực tiếp</strong>. Ví dụ thực tế: Kẻ gian gửi email mạo danh phòng đào tạo ULIS yêu cầu cập nhật thông tin học tập, hay dán đè mã QR thanh toán giả mạo tại căng-tin trường học.",
-        challenge: "Tìm kiếm các vụ việc có thật liên quan trực tiếp đến đời sống sinh viên để tăng tính thuyết phục chứ không lấy ví dụ vĩ mô của doanh nghiệp.",
-        input: "Tin tức báo chí, diễn đàn cảnh giác sinh viên.",
-        output: "Bảng đối chiếu 'Hình thức - Ví dụ - Hậu quả' hoàn thiện trên Google Docs."
-      },
-      {
-        id: 3,
-        day: "Thứ Năm (Ngày 4)",
-        title: "Xây dựng cẩm nang ứng phó",
-        summary: "Đúc kết bộ quy tắc '5 Không & 3 Kiểm tra'.",
-        desc: "Dựa trên những phân tích lý thuyết và thực tiễn, mình tiến hành đúc kết và chuyển hóa tri thức thành hành động cụ thể thông qua hai bộ quy tắc ngắn gọn, dễ nhớ: <strong>Quy tắc 5 KHÔNG</strong> (Không nhấp liên kết lạ, Không chia sẻ OTP, Không cung cấp mật khẩu, Không quét QR lạ, Không chuyển khoản khi chưa xác minh) và <strong>Quy tắc 3 KIỂM TRA</strong> (Kiểm tra người gửi, Kiểm tra đường dẫn, Kiểm tra nguồn tin).",
-        challenge: "Làm thế nào để chuyển đổi các thuật ngữ bảo mật khô khan thành những khẩu hiệu hành động trực quan, ngắn gọn, dễ thuộc lòng.",
-        input: "Bản thảo lý thuyết & ví dụ thu tập được từ các ngày trước.",
-        output: "Bộ giải pháp bảo mật hoàn thiện để gửi cho các bạn thiết kế đồ họa."
-      },
-      {
-        id: 4,
-        day: "Chủ Nhật (Ngày 5)",
-        title: "Đồng bộ Drive & Đóng thẻ",
-        summary: "Sắp xếp hệ thống thư mục đám mây.",
-        desc: "Mình thực hiện số hóa toàn bộ kết quả nghiên cứu thành tệp tin Word định dạng chuẩn hóa <code>NMCNS_BT-N.docx</code>. Tiếp theo, mình truy cập Google Drive của nhóm, tạo thư mục con 'Thongtin' bên trong thư mục gốc 'NMCNS_N42' để lưu trữ tệp tin. Đồng thời, mình cập nhật tiến độ công việc, tải lên ảnh chụp minh chứng hoạt động và thực hiện đóng thẻ nhiệm vụ trên bảng Trello của nhóm.",
-        challenge: "Hạn chế thao tác trên điện thoại khiến việc định dạng tệp tin Word và tải lên Drive của nhóm gặp đôi chút bất tiện về giao diện.",
-        input: "Tệp tin hoàn thiện, tài khoản Google Drive & Trello nhóm.",
-        output: "Hệ thống lưu trữ thư mục Drive ngăn nắp, bảng tiến độ Trello hiển thị trạng thái hoàn tất."
-      }
-    ];
-
-    // Dummy future/doing tasks for Trello Board
-    const fallbackTasks = [
-      { id: 5, day: "Tương lai (Giai đoạn 2)", title: "Khảo sát diện rộng", summary: "Khảo sát mức độ nhận diện lừa đảo của sinh viên sau khi cẩm nang được phát hành học đường.", challenge: "Cần xây dựng bảng hỏi Google Forms tối ưu.", input: "Cẩm nang đã phát hành", output: "Mẫu khảo sát trực tuyến" },
-      { id: 6, day: "Hiện tại", title: "Hỗ trợ dịch thuật", summary: "Hỗ trợ chuyển ngữ cẩm nang sang phiên bản tiếng Anh cho sinh viên quốc tế.", challenge: "Sử dụng chính xác thuật ngữ bảo mật tiếng Anh.", input: "Bản dịch thô", output: "Bản dịch học thuật hoàn chỉnh" }
-    ];
-
-    // --- Interactive Logic Engines ---
+    // --- DOM Elements & Event Listeners Implementation ---
 
     // 1. Init Assignment 1 Steps
     const stepHeader = document.getElementById('stepHeader');
@@ -2287,65 +2434,48 @@
       }, 200);
     }
 
-    // 4. Interactive Trello Kanban Engine for Assignment 4 (XỊN XÒ)
-    const trelloDoneList = document.getElementById('trelloDoneList');
-    const trelloTaskViewer = document.getElementById('trelloTaskViewer');
-
-    function renderTrelloDoneCards() {
-      trelloDoneList.innerHTML = '';
-      trelloTasks.forEach((task, idx) => {
-        const card = document.createElement('div');
-        card.className = `trello-card ${idx === 0 ? 'active' : ''}`;
-        card.setAttribute('data-id', task.id);
-        card.onclick = () => selectTrelloTask(task.id);
-        card.innerHTML = `
-          <h6>Ngày ${idx + 1}: ${task.title}</h6>
-          <p>${task.summary}</p>
-          <span class="card-badge">Đã xong</span>
-        `;
-        trelloDoneList.appendChild(card);
-      });
-      displayTrelloTask(0); // display first task by default
-    }
-
-    function selectTrelloTask(id) {
-      // Remove active class from all trello cards
-      const cards = document.querySelectorAll('.trello-card');
-      cards.forEach(card => card.classList.remove('active'));
-
-      // Add active to current clicked card
-      const targetCard = document.querySelector(`.trello-card[data-id="${id}"]`);
-      if (targetCard) targetCard.classList.add('active');
-
-      displayTrelloTask(id);
-    }
-
-    function displayTrelloTask(id) {
-      let task = trelloTasks.find(t => t.id === id);
-      if (!task) task = fallbackTasks.find(t => t.id === id);
-
-      trelloTaskViewer.style.opacity = '0';
-      setTimeout(() => {
-        trelloTaskViewer.innerHTML = `
-          <h4><i class="fa-regular fa-clipboard"></i> Đầu việc chi tiết: ${task.title}</h4>
-          <div class="viewer-body">
-            <p><strong>Thời gian thực hiện:</strong> ${task.day}</p>
-            <p><strong>Nội dung & Cách thức triển khai:</strong> ${task.desc}</p>
-            <p><strong>Thử thách gặp phải & Cách xử lý:</strong> ${task.challenge}</p>
-          </div>
-          <div class="viewer-meta">
-            <span><i class="fa-solid fa-arrow-right-to-bracket"></i> Input: ${task.input}</span>
-            <span><i class="fa-solid fa-arrow-right-from-bracket"></i> Output: ${task.output}</span>
-          </div>
-        `;
-        trelloTaskViewer.style.opacity = '1';
-      }, 150);
-    }
-
     function escapeHTML(str) {
       return str.replace(/[&<>'"]/g, 
         tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
       );
+    }
+
+    // --- Drive & Docs Simulator Interactive Functions (Xịn xò) ---
+    function toggleDriveFolder(id) {
+      const subfolder = document.getElementById(id);
+      if (subfolder) {
+        subfolder.classList.toggle('open');
+        // Toggle directory open/close folder icons dynamically
+        const parentIcon = subfolder.previousSibling.previousSibling;
+        if (parentIcon && parentIcon.classList.contains('fa-folder')) {
+          // No need to overcomplicate, toggle is visually handled by CSS height
+        }
+      }
+    }
+
+    function resolveComment(id) {
+      const card = document.getElementById(id);
+      if (card) {
+        card.style.transition = 'all 0.4s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+          card.style.display = 'none';
+          
+          // If all comments are resolved, display a nice system message
+          const sidebar = document.getElementById('commentSidebar');
+          if (sidebar.querySelectorAll('.docs-comment-card[style*="display: none"]').length === 2) {
+            const systemMsg = document.createElement('div');
+            systemMsg.style.fontSize = '0.75rem';
+            systemMsg.style.color = '#1a73e8';
+            systemMsg.style.textAlign = 'center';
+            systemMsg.style.marginTop = '1rem';
+            systemMsg.style.fontWeight = 'bold';
+            systemMsg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Đã giải quyết toàn bộ thảo luận!';
+            sidebar.appendChild(systemMsg);
+          }
+        }, 400);
+      }
     }
 
     // Initialize all interactive content on window load
@@ -2353,7 +2483,6 @@
       renderSteps();
       renderTable();
       renderPromptSelector();
-      renderTrelloDoneCards();
     });
 
     // --- Custom Cursor Tracking ---
@@ -2369,7 +2498,7 @@
     });
 
     // Scale cursor on hoverable elements
-    const hoverables = document.querySelectorAll('a, button, .tab-btn, .artifact-card, .step-btn, .filter-btn, .prompt-task-btn, .rule-item, .trello-card');
+    const hoverables = document.querySelectorAll('a, button, .tab-btn, .artifact-card, .step-btn, .filter-btn, .prompt-task-btn, .rule-item, .drive-item, .btn-resolve');
     hoverables.forEach(item => {
       item.addEventListener('mouseenter', () => {
         cursor.style.width = '44px';
